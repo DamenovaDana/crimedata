@@ -1,0 +1,9 @@
+{
+    "classification": {
+        "Model": "XGBoost",
+        "Accuracy": 0.9300225733634312,
+        "Precision": 0.9304029199921222,
+        "Recall": 0.9300225733634312,
+        "F1-Score": 0.9289562841240379
+    }
+}

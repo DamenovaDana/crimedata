@@ -1,0 +1,94 @@
+.home {
+  background: #b1ccdf;
+  height: 140vh;
+  position: relative;
+  display: flex;
+  padding-top: 70px;
+
+  .left {
+    width: 40%;
+    padding: 20px;
+    border-right: 1px solid black;
+    text-align: center;
+
+    h3 {
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .input-groups {
+      display: flex;
+      .group {
+        width: 40%; 
+
+        .input-group {
+          margin-bottom: 15px;
+
+          label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+          }
+
+          input[type="text"] {
+            width: 100%; /* Поле ввода занимает всю ширину группы */
+            padding: 8px;
+            font-size: 14px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+          }
+        }
+      }
+      .group-2 {
+        margin-left: 100px;
+        width: 40%; 
+
+        .input-group {
+          margin-bottom: 15px;
+
+          label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+          }
+
+          input[type="text"] {
+            width: 100%; /* Поле ввода занимает всю ширину группы */
+            padding: 8px;
+            font-size: 14px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+          }
+        }
+      }
+    }
+    button {
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    
+  }
+
+  .right {
+    width: 60%;
+    padding: 20px;
+    text-align: center;
+    
+   
+ 
+    .feature{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      img {
+        height: 80%;
+        width: 80%;
+        margin: auto;
+      }
+    }
+  }
+}
