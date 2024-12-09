@@ -1,30 +1,31 @@
-// React Frontend
 import './classification.scss';
 import { useState } from 'react';
 import axios from 'axios';
 
 const Classification = () => {
   const [inputs, setInputs] = useState({
-    population: "",
-    NumUnderPov: "",
-    NumKidsBornNeverMar: "",
-    numbUrban: "",
-    HousVacant: "",
-    NumInShelters: "",
-    state_encoded: "",
-    NumImmig: "",
-    NumStreet: "",
-    burglPerPop: "",
-    PctKidsBornNeverMar: "",
-    LandArea: "",
-    LemasPctOfficDrugUn: "",
-    racePctWhite: "",
-    county_code_encoded: "",
-    FemalePctDiv: "",
-    TotalPctDiv: "",
-    PctPolicMinor: "",
-    PolicAveOTWorked: "",
-    PctPersOwnOccup: "",
+    
+      "NumKidsBornNeverMar": 1,
+      "population": 1,
+      "NumUnderPov": 1,
+      "numbUrban": 1,
+      "HousVacant": 1,
+      "NumInShelters": 1,
+      "state_encoded": 1,
+      "NumStreet": 1,
+      "LemasPctOfficDrugUn": 1,
+      "LandArea": 1,
+      "NumImmig": 1,
+      "county_code_encoded": 1,
+      "PctKidsBornNeverMar": 1,
+      "racePctWhite": 1,
+      "FemalePctDiv": 1,
+      "PctKids2Par": 1,
+      "PctFam2Par": 1,
+      "TotalPctDiv": 1,
+      "NumKindsDrugsSeiz": 1,
+      "PctYoungKids2Par": 1
+    
   });
   const [prediction, setPrediction] = useState(null);
   const [modelMetrics, setModelMetrics] = useState(null);
@@ -39,16 +40,39 @@ const Classification = () => {
   };
 
   const handleSubmit = async () => {
+    setError(null);
+    setPrediction(null);
+    setModelMetrics(null);
+
     try {
+      const formattedInputs = Object.fromEntries(
+        Object.entries(inputs).map(([key, value]) => [key, parseFloat(value) || 0])
+      );
+
       const response = await axios.post(
         'http://localhost:5000/classification',
-        inputs
+        formattedInputs
       );
+
+      const newResult = {
+        inputs: formattedInputs,
+        target: "High/Low crimerate",
+        prediction: response.data.predictedClass,
+        metrics: response.data.classificationMetrics,
+        type: "classification",
+        timestamp: new Date().toISOString(),
+      };
+
+      // Сохраняем результат в localStorage
+      const savedResults = JSON.parse(localStorage.getItem('results')) || [];
+      savedResults.push(newResult);
+      localStorage.setItem('results', JSON.stringify(savedResults));
+
       setPrediction(response.data.predictedClass);
       setModelMetrics(response.data.classificationMetrics);
     } catch (err) {
-      console.error("Error during prediction request:", err);
-      setError("Failed to fetch prediction. Please try again.");
+      console.error('Error during prediction request:', err);
+      setError('Failed to fetch prediction. Please try again.');
     }
   };
 
@@ -57,10 +81,10 @@ const Classification = () => {
       <div className="left">
         <h3>Input Factors</h3>
         <div className="input-groups">
-          {/* First Group of Inputs */}
+          {}
           <div className="group">
             {Object.keys(inputs)
-              .slice(0, Math.ceil(Object.keys(inputs).length / 2)) // Divide inputs into first half
+              .slice(0, Math.ceil(Object.keys(inputs).length / 2)) 
               .map((key) => (
                 <div className="input-group" key={key}>
                   <label>{key}</label>
@@ -75,10 +99,10 @@ const Classification = () => {
               ))}
           </div>
 
-          {/* Second Group of Inputs */}
+          {}
           <div className="group-2">
             {Object.keys(inputs)
-              .slice(Math.ceil(Object.keys(inputs).length / 2)) // Divide inputs into second half
+              .slice(Math.ceil(Object.keys(inputs).length / 2)) 
               .map((key) => (
                 <div className="input-group" key={key}>
                   <label>{key}</label>
@@ -107,7 +131,6 @@ const Classification = () => {
             </p>
         </div>
         )}
-
         {modelMetrics && (
           <div>
             <h3>Model Metrics:</h3>

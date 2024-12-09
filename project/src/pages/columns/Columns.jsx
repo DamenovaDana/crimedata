@@ -11,7 +11,7 @@ const Columns = () => {
   const [featureWeights, setFeatureWeights] = useState({});
   const [expandedCategories, setExpandedCategories] = useState({});
 
-  // Fetch columns and targets from the backend
+  // получаем колонны из бэка
   useEffect(() => {
     fetch('http://127.0.0.1:5000/get_columns')
       .then(response => response.json())
@@ -162,7 +162,6 @@ const Columns = () => {
     ],
   };
   
-  // Inside your return statement
 <div className="column-categories">
   {Object.entries(categories).map(([category, columns]) => (
     <div key={category} className="category">
@@ -222,15 +221,29 @@ const Columns = () => {
       if (!response.ok) throw new Error('Failed to fetch results.');
 
       const data = await response.json();
-
+        
       setResult({
         rmse: data.rmse,
         mae: data.mae,
         r2: data.r2,
+        mean: data.mean,
         user_prediction: data.user_prediction[0],
       });
 
       setFeatureWeights(data.feature_weights);
+      const newResult = {
+        inputs: inputData,
+        target: selectedTarget,
+        prediction: data.user_prediction[0],
+        metrics: `RMSE: ${data.rmse}, MAE: ${data.mae}, R²: ${data.r2}, Mean: ${data.mean}`,
+        type: "manual",
+        timestamp: new Date().toISOString(),
+      };
+
+      // Сохраняем результат в localStorage
+      const savedResults = JSON.parse(localStorage.getItem('results')) || [];
+      savedResults.push(newResult);
+      localStorage.setItem('results', JSON.stringify(savedResults));
 
     } catch (error) {
       console.error('Error:', error);
@@ -256,7 +269,7 @@ const Columns = () => {
           </select>
         </div>
 
-        {/* Categorized Columns */}
+        {}
         <div className="column-categories">
           {Object.entries(categories).map(([category, columns]) => (
             <div key={category} className="category">
@@ -286,7 +299,6 @@ const Columns = () => {
           ))}
         </div>
 
-        {/* Input fields for selected columns */}
         <div>
           {selectedColumns.map((column) => (
             <div key={column}>
@@ -316,6 +328,7 @@ const Columns = () => {
               <p>RMSE: {result.rmse}</p>
               <p>MAE: {result.mae}</p>
               <p>R²: {result.r2}</p>
+              <p>Mean: {result.mean}</p>
               <h3>Prediction for Input:</h3>
               <p>{result.user_prediction}</p>
             </div>
@@ -342,3 +355,4 @@ const Columns = () => {
 };
 
 export default Columns;
+

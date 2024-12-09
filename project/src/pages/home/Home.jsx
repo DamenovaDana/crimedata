@@ -3,6 +3,186 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Home = () => {
+  const defaultInputs = {
+    murders: {
+      NumKidsBornNeverMar: 1,
+      NumUnderPov: 1,
+      encoded_county: 1,
+      HousVacant: 1,
+      racepctblack: 1,
+      racePctWhite: 1,
+      LandArea: 1,
+      encoded_state: 1,
+      population: 1,
+      NumImmig: 1,
+      PopDens: 1,
+      MedOwnCostPctInc: 1,
+      PctHousOccup: 1,
+      pctWFarmSelf: 1,
+      MalePctDivorce: 1,
+      HispPerCap: 1,
+      TotalPctDiv: 1,
+      FemalePctDiv: 1,
+      PctVacMore6Mos: 1,
+      MedYrHousBuilt: 1,
+    },
+    rapes: {
+      NumUnderPov: 1,
+      encoded_state: 1,
+      HousVacant: 1,
+      NumKidsBornNeverMar: 1,
+      population: 1,
+      MalePctDivorce: 1,
+      numbUrban: 1,
+      PolicReqPerOffic: 1,
+      FemalePctDiv: 1,
+      TotalPctDiv: 1,
+      racepctblack: 1,
+      PolicCars: 1,
+      NumInShelters: 1,
+      NumStreet: 1,
+      LandArea: 1,
+      PctWorkMomYoungKids: 1,
+      racePctAsian: 1,
+      AsianPerCap: 1,
+      MedOwnCostPctIncNoMtg: 1,
+      blackPerCap: 1,
+    },
+    robberies: {
+      NumKidsBornNeverMar: 1,
+      NumImmig: 1,
+      numbUrban: 1,
+      encoded_state: 1,
+      HousVacant: 1,
+      racepctblack: 1,
+      racePctWhite: 1,
+      PctBornSameState: 1,
+      pctWFarmSelf: 1,
+      FemalePctDiv: 1,
+      encoded_county: 1,
+      population: 1,
+      MalePctDivorce: 1,
+      RentLowQ: 1,
+      NumStreet: 1,
+      HispPerCap: 1,
+      NumUnderPov: 1,
+      TotalPctDiv: 1,
+      PctUsePubTrans: 1,
+      PctHousLess3BR: 1,
+    },
+    assaults: {
+      NumKidsBornNeverMar: 1,
+      encoded_state: 1,
+      HousVacant: 1,
+      NumUnderPov: 1,
+      population: 1,
+      encoded_county: 1,
+      numbUrban: 1,
+      PctNotSpeakEnglWell: 1,
+      NumStreet: 1,
+      PctHousOccup: 1,
+      OwnOccQrange: 1,
+      pctWWage: 1,
+      HispPerCap: 1,
+      AsianPerCap: 1,
+      MedOwnCostPctInc: 1,
+      racePctWhite: 1,
+      LandArea: 1,
+      PctSameHouse85: 1,
+      PctWOFullPlumb: 1,
+      NumInShelters: 1,
+    },
+    burglaries: {
+      population: 1,
+      NumUnderPov: 1,
+      NumKidsBornNeverMar: 1,
+      HousVacant: 1,
+      numbUrban: 1,
+      encoded_state: 1,
+      racePctWhite: 1,
+      PctPersDenseHous: 1,
+      pctWInvInc: 1,
+      FemalePctDiv: 1,
+      TotalPctDiv: 1,
+      PctWorkMomYoungKids: 1,
+      PctHousOccup: 1,
+      encoded_county: 1,
+      LandArea: 1,
+      whitePerCap: 1,
+      racepctblack: 1,
+      PctEmplManu: 1,
+      PctEmplProfServ: 1,
+      MalePctDivorce: 1,
+    },
+    larcenies: {
+      population: 1,
+      NumUnderPov: 1,
+      numbUrban: 1,
+      NumKidsBornNeverMar: 1,
+      MalePctDivorce: 1,
+      OwnOccHiQuart: 1,
+      blackPerCap: 1,
+      FemalePctDiv: 1,
+      encoded_state: 1,
+      HousVacant: 1,
+      MedRentPctHousInc: 1,
+      LandArea: 1,
+      RentLowQ: 1,
+      TotalPctDiv: 1,
+      PctVacMore6Mos: 1,
+      whitePerCap: 1,
+      NumInShelters: 1,
+      pctWFarmSelf: 1,
+      OwnOccLowQuart: 1,
+      PctWorkMomYoungKids: 1,
+    },
+    autoTheft: {
+      numbUrban: 1,
+      population: 1,
+      NumImmig: 1,
+      NumKidsBornNeverMar: 1,
+      LemasPctOfficDrugUn: 1,
+      PctPersDenseHous: 1,
+      FemalePctDiv: 1,
+      encoded_state: 1,
+      TotalPctDiv: 1,
+      PctNotSpeakEnglWell: 1,
+      PctKids2Par: 1,
+      PctTeen2Par: 1,
+      racePctWhite: 1,
+      PctSameCity85: 1,
+      MalePctDivorce: 1,
+      HousVacant: 1,
+      AsianPerCap: 1,
+      PctEmplProfServ: 1,
+      pctWFarmSelf: 1,
+      racepctblack: 1,
+    },
+    arsons: {
+      NumUnderPov: 1,
+      population: 1,
+      numbUrban: 1,
+      encoded_state: 1,
+      NumKidsBornNeverMar: 1,
+      encoded_county: 1,
+      NumInShelters: 1,
+      FemalePctDiv: 1,
+      PctVacantBoarded: 1,
+      TotalPctDiv: 1,
+      MalePctDivorce: 1,
+      PctWOFullPlumb: 1,
+      PctEmplManu: 1,
+      OtherPerCap: 1,
+      NumKindsDrugsSeiz: 1,
+      LandArea: 1,
+      PctVacMore6Mos: 1,
+      pctWRetire: 1,
+      PctSameCity85: 1,
+      MedOwnCostPctIncNoMtg: 1,
+    },
+  };
+  
+  
   const [targets, ] = useState([
     "murders",
     "rapes",
@@ -23,22 +203,32 @@ const Home = () => {
     const fetchInputs = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/inputs/${selectedTarget}`);
-        const initialInputs = response.data.features.reduce((acc, feature) => {
-          acc[feature] = ""; // Initialize inputs as empty strings
+        const fetchedInputs = response.data.features.reduce((acc, feature) => {
+          acc[feature] = ""; 
           return acc;
         }, {});
-        setInputs(initialInputs);
+  
+        // Проверить, есть ли  значения для текущего таргета
+        const prefilledInputs = defaultInputs[selectedTarget] || {};
+        const combinedInputs = { ...fetchedInputs, ...prefilledInputs }; // Объединить данные
+        setInputs(combinedInputs);
       } catch (err) {
         console.error("Error fetching input fields:", err);
         setError("Failed to load input fields. Please try again.");
       }
     };
-
     fetchInputs();
   }, [selectedTarget]);
 
   const handleTargetChange = (e) => {
-    setSelectedTarget(e.target.value);
+    const newTarget = e.target.value;
+    setSelectedTarget(newTarget);
+  
+    // Сброс состояния для нового таргета
+    const prefilledInputs = defaultInputs[newTarget] || {};
+    setInputs({ ...prefilledInputs });
+  
+    // Сброс предсказаний и ошибок
     setPrediction(null);
     setModelMetrics(null);
     setError(null);
@@ -52,11 +242,38 @@ const Home = () => {
     });
   };
 
+  const saveResultToLocalStorage = (data) => {
+    const savedResults = JSON.parse(localStorage.getItem('results')) || [];
+    const updatedResults = [...savedResults, data];
+    localStorage.setItem('results', JSON.stringify(updatedResults));
+  };
+
   const handleSubmit = async () => {
     try {
-      const response = await axios.post(`http://localhost:5000/predict/${selectedTarget}`, inputs);
+      const formattedInputs = Object.fromEntries(
+        Object.entries(inputs).map(([key, value]) => [key, parseFloat(value) || 0])
+      );
+
+      const response = await axios.post(
+        `http://localhost:5000/predict/${selectedTarget}`,
+        formattedInputs
+      );
+
+      const predictionData = {
+        target: selectedTarget,
+        prediction: response.data.prediction,
+        inputs: formattedInputs,
+        type: "without crimes",
+        metrics: response.data.modelMetrics,
+        timestamp: new Date().toISOString(),
+      };
+
+      // Установим предсказания и метрики
       setPrediction(response.data.prediction);
       setModelMetrics(response.data.modelMetrics);
+
+      // Сохранили всё в localStorage
+      saveResultToLocalStorage(predictionData);
     } catch (err) {
       console.error("Error during prediction request:", err);
       setError("Failed to fetch prediction. Please try again.");

@@ -16,7 +16,7 @@ const Navbar = () => {
       <div className='container'>
         <div className="left">   
           <Shield className="icon"/>
-          <h2>Crime detector</h2>
+          <h2>Crime Detector</h2>
         </div>
         <div className="right">
             <Link to='/' className='link'>
@@ -31,14 +31,13 @@ const Navbar = () => {
             <Link to='/columns' className='link'> 
               <span>Manual training</span>
             </Link>
-            <span>Crime Statistics</span>
-            <div className="profile">
-                <ArrowDropDown className="icon"/>
-                <div className="options">
-                    <span>Settings</span>
-                    <span>Logout</span>
-                </div>
-            </div>
+            <Link to='/results' className='link'> 
+              <span>Saved Results</span>
+            </Link>
+            <Link to='/charts' className='link'> 
+              <span>Crime Statistics</span>
+            </Link>
+            
         </div>
       </div>
     </div>
