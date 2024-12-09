@@ -1,4 +1,8 @@
-flask
-numpy
+Flask
 pandas
+numpy
+joblib
+Flask-Cors
 scikit-learn
+matplotlib
+seaborn
