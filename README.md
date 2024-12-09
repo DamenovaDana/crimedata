@@ -10,7 +10,7 @@
    1.1) classification - создание модели классификации High/Low crime в данном сообществе. Файл  - CrimeRateClassification2classes.ipynb <br>
    1.2) regression - создание 8 моделей регрессии по разным видам преступлений (murder, arson, etc), основываясь только на социальных и демографических данных. Файл - crimedata_final.ipynb <br>
    1.3) regression with crimes - создание 8 моделей регрессии по разным видам преступлений (murder, arson, etc), основываясь на социальных, демографических данных, а также других видах преступлений помимо выбранного. Файл - crimedataWithCrimes.ipynb <br>
-2) api - бэкенд сайта. <br>
+2) api - бэкенд сайта. Внутри можно найти файл Column Description.txt с объяснением значений колонн. <br>
 3) project - фронтенд сайта. <br>
 <h1> Запуск: </h1>
 1) Открыть папку crimedata в среде разработки. <br>
